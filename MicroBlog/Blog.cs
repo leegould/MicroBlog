@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Nancy;
 
 namespace MicroBlog
 {
-    public class BlogModule : NancyModule
+    public class Blog
     {
-        public BlogModule()
-        {
-            Get["/{id}"] = _ => new Blog();
-        }
+        
     }
 }

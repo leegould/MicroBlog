@@ -7,7 +7,7 @@ namespace MicroBlog.Tests
     public class BlogModuleTest
     {
         [Fact]
-        public void Should_Return_Blog_When_Queried_With_Id()
+        public void Should_Return_OK_When_Queried_With_Id()
         {
             var bootstrapper = new DefaultNancyBootstrapper();
             var browser = new Browser(bootstrapper);
