@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Nancy;
+﻿using Nancy;
 
 namespace MicroBlog
 {
@@ -11,7 +6,7 @@ namespace MicroBlog
     {
         public BlogModule()
         {
-            Get["/{id}"] = _ => new Blog();
+            Get["/{id}"] = _ => "Test";
         }
     }
 }

@@ -9,8 +9,10 @@ namespace MicroBlog.Tests
         [Fact]
         public void Should_Return_OK_When_Queried_With_Id()
         {
-            var bootstrapper = new DefaultNancyBootstrapper();
-            var browser = new Browser(bootstrapper);
+            var browser = new Browser(cfg =>
+            {
+                cfg.Module<BlogModule>();
+            });
 
             var result = browser.Get("/1", with =>
             {

@@ -67,7 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MicroBlog\MicroBlog.csproj">
-      <Project>{46748bc7-2bc7-43c5-849a-1518a19034cd}</Project>
+      <Project>{890497cd-cb0a-421c-92e6-0c0cea09b112}</Project>
       <Name>MicroBlog</Name>
     </ProjectReference>
   </ItemGroup>
