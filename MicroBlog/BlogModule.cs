@@ -6,7 +6,11 @@ namespace MicroBlog
     {
         public BlogModule()
         {
-            Get["/{id}"] = _ => "Test";
+            Get["/{id}"] = _ =>
+            {
+                var blog = new Blog();
+                return Response.AsJson(blog);
+            };
         }
     }
 }
