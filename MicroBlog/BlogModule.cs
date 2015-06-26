@@ -8,7 +8,7 @@ namespace MicroBlog
         {
             Get["/{id}"] = _ =>
             {
-                var blog = new Blog();
+                var blog = new BlogPost();
                 return Response.AsJson(blog);
             };
         }
