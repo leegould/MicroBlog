@@ -23,7 +23,7 @@ namespace MicroBlog.Tests
         }
 
         [Fact]
-        public void Should_Return_A_BlogPost_When_Queried_With_Id()
+        public void Should_Return_A_Post_When_Queried_With_Id()
         {
             var browser = new Browser(cfg =>
             {
@@ -35,7 +35,7 @@ namespace MicroBlog.Tests
                 with.HttpRequest();
             });
 
-            Assert.Equal(typeof(BlogPost), result.Body.DeserializeJson<BlogPost>().GetType());
+            Assert.Equal(typeof(Post), result.Body.DeserializeJson<Post>().GetType());
         }
     }
 }
