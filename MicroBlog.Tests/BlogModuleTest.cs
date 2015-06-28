@@ -37,5 +37,21 @@ namespace MicroBlog.Tests
 
             Assert.Equal(typeof(Post), result.Body.DeserializeJson<Post>().GetType());
         }
+
+        [Fact]
+        public void Should_Return_NotFound_If_Id_Doesnt_Exist()
+        {
+            var browser = new Browser(cfg =>
+            {
+                cfg.Module<BlogModule>();
+            });
+
+            var result = browser.Get("/999", with =>
+            {
+                with.HttpRequest();
+            });
+
+            Assert.Equal(HttpStatusCode.NotFound, result.StatusCode);
+        }
     }
 }
