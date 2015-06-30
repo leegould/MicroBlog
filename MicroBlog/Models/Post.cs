@@ -1,4 +1,4 @@
-﻿namespace MicroBlog
+﻿namespace MicroBlog.Models
 {
     public class Post
     {

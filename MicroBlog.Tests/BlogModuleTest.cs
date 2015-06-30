@@ -1,4 +1,5 @@
-﻿using Nancy;
+﻿using MicroBlog.Models;
+using Nancy;
 using Nancy.Testing;
 using Xunit;
 

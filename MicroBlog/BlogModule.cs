@@ -1,10 +1,12 @@
-﻿using Nancy;
+﻿using MicroBlog.Interface;
+using MicroBlog.Models;
+using Nancy;
 
 namespace MicroBlog
 {
     public class BlogModule : NancyModule
     {
-        public BlogModule()
+        public BlogModule(IPostRepository postRepository)
         {
             Get["/{id}"] = _ =>
             {
