@@ -6,8 +6,12 @@ namespace MicroBlog
 {
     public class BlogModule : NancyModule
     {
-        public BlogModule(IPostRepository postRepository)
+        private IPostRepository postRepository;
+
+        public BlogModule(IPostRepository postrepository)
         {
+            postRepository = postrepository;
+
             Get["/{id}"] = _ =>
             {
                 var blog = new Post();

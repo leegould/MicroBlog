@@ -1,5 +1,13 @@
-﻿using MicroBlog.Models;
+﻿using System;
+using System.Linq.Expressions;
+
+using MicroBlog.Interface;
+using MicroBlog.Models;
+
+using Moq;
+
 using Nancy;
+using Nancy.Responses.Negotiation;
 using Nancy.Testing;
 using Xunit;
 
@@ -42,10 +50,15 @@ namespace MicroBlog.Tests
         [Fact]
         public void Should_Return_NotFound_If_Id_Doesnt_Exist()
         {
-            var browser = new Browser(cfg =>
-            {
-                cfg.Module<BlogModule>();
-            });
+            var fakePostRepository = new Mock<IPostRepository>();          
+            fakePostRepository.Setup(x => x.Get(It.IsAny<int>())).Throws(new Exception("Not Found"));
+            
+            var browser = new Browser(
+                cfg =>
+                {
+                    cfg.Module<BlogModule>();
+                    cfg.Dependencies<IPostRepository>(fakePostRepository);
+                });
 
             var result = browser.Get("/999", with =>
             {
