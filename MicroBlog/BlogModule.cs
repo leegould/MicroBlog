@@ -12,10 +12,10 @@ namespace MicroBlog
         {
             postRepository = postrepository;
 
-            Get["/{id}"] = _ =>
+            Get["/{id:int}"] = x =>
             {
-                var blog = new Post();
-                return Response.AsJson(blog);
+                Post item = postRepository.Get(x.id);
+                return Response.AsJson(item);
             };
         }
     }

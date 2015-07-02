@@ -1,14 +1,11 @@
-﻿using System;
-using System.Linq.Expressions;
-
-using MicroBlog.Interface;
+﻿using MicroBlog.Interface;
 using MicroBlog.Models;
 
 using Moq;
 
 using Nancy;
-using Nancy.Responses.Negotiation;
 using Nancy.Testing;
+
 using Xunit;
 
 namespace MicroBlog.Tests
@@ -18,8 +15,12 @@ namespace MicroBlog.Tests
         [Fact]
         public void Should_Return_OK_When_Queried_With_Id()
         {
+            var fakePostRepository = new Mock<IPostRepository>();
+            fakePostRepository.Setup(x => x.Get(It.IsAny<int>())).Returns(new Post()); 
+            
             var browser = new Browser(cfg =>
             {
+                cfg.Dependencies<IPostRepository>(fakePostRepository.Object);
                 cfg.Module<BlogModule>();
             });
 
@@ -34,8 +35,12 @@ namespace MicroBlog.Tests
         [Fact]
         public void Should_Return_A_Post_When_Queried_With_Id()
         {
+            var fakePostRepository = new Mock<IPostRepository>();
+            fakePostRepository.Setup(x => x.Get(It.IsAny<int>())).Returns(new Post()); 
+
             var browser = new Browser(cfg =>
             {
+                cfg.Dependencies<IPostRepository>(fakePostRepository.Object);
                 cfg.Module<BlogModule>();
             });
 
@@ -50,14 +55,14 @@ namespace MicroBlog.Tests
         [Fact]
         public void Should_Return_NotFound_If_Id_Doesnt_Exist()
         {
-            var fakePostRepository = new Mock<IPostRepository>();          
-            fakePostRepository.Setup(x => x.Get(It.IsAny<int>())).Throws(new Exception("Not Found"));
+            var fakePostRepository = new Mock<IPostRepository>();
+            fakePostRepository.Setup(x => x.Get(It.IsAny<int>())).Returns((Post)null); //.Throws(new Exception("Not Found"));
             
             var browser = new Browser(
                 cfg =>
                 {
                     cfg.Module<BlogModule>();
-                    cfg.Dependencies<IPostRepository>(fakePostRepository);
+                    cfg.Dependencies<IPostRepository>(fakePostRepository.Object);
                 });
 
             var result = browser.Get("/999", with =>
