@@ -15,7 +15,12 @@ namespace MicroBlog
             Get["/{id:int}"] = x =>
             {
                 Post item = postRepository.Get(x.id);
-                return Response.AsJson(item);
+                if (item != null)
+                {
+                    return Response.AsJson(item);
+                }
+
+                return HttpStatusCode.NotFound;
             };
         }
     }
