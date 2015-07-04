@@ -1,6 +1,7 @@
 ﻿using MicroBlog.Interface;
 using MicroBlog.Models;
 using Nancy;
+using Nancy.ModelBinding;
 
 namespace MicroBlog
 {
@@ -21,6 +22,13 @@ namespace MicroBlog
                 }
 
                 return HttpStatusCode.NotFound;
+            };
+
+            Post["/"] = x =>
+            {
+                var newItem = this.Bind<Post>();
+                Post item = postrepository.Create(newItem);
+                return Response.AsJson(item, HttpStatusCode.Created);
             };
         }
     }

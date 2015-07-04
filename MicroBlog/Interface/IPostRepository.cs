@@ -11,5 +11,7 @@ namespace MicroBlog.Interface
     public interface IPostRepository
     {
         Post Get(int id);
+
+        Post Create(Post post);
     }
 }

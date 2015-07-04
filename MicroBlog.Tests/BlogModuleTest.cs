@@ -72,5 +72,32 @@ namespace MicroBlog.Tests
 
             Assert.Equal(HttpStatusCode.NotFound, result.StatusCode);
         }
+
+        #region Creating
+
+        [Fact]
+        public void Should_Return_Created_If_Created()
+        {
+            var fakePostRepository = new Mock<IPostRepository>();
+            var fakePost = new Post();
+            fakePostRepository.Setup(x => x.Create(fakePost)).Returns(fakePost);
+
+            var browser = new Browser(
+                cfg =>
+                {
+                    cfg.Module<BlogModule>();
+                    cfg.Dependencies<IPostRepository>(fakePostRepository.Object);
+                });
+
+            var result = browser.Post("/", with =>
+            {
+                with.HttpRequest();
+                with.FormValue("Content", "Test Content");
+            });
+
+            Assert.Equal(HttpStatusCode.Created, result.StatusCode);
+        }
+
+        #endregion
     }
 }
