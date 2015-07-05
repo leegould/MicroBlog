@@ -7,7 +7,7 @@ namespace MicroBlog
 {
     public class BlogModule : NancyModule
     {
-        private IPostRepository postRepository;
+        private readonly IPostRepository postRepository;
 
         public BlogModule(IPostRepository postrepository)
         {
@@ -16,19 +16,14 @@ namespace MicroBlog
             Get["/{id:int}"] = x =>
             {
                 Post item = postRepository.Get(x.id);
-                if (item != null)
-                {
-                    return Response.AsJson(item);
-                }
-
-                return HttpStatusCode.NotFound;
+                return item != null ? Response.AsJson(item) : HttpStatusCode.NotFound;
             };
 
             Post["/"] = x =>
             {
                 var newItem = this.Bind<Post>();
-                Post item = postrepository.Create(newItem);
-                return Response.AsJson(item, HttpStatusCode.Created);
+                var item = postrepository.Create(newItem);
+                return item != null ? Response.AsJson(item, HttpStatusCode.Created) : HttpStatusCode.InternalServerError;
             };
         }
     }

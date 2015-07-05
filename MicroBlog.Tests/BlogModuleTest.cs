@@ -80,7 +80,7 @@ namespace MicroBlog.Tests
         {
             var fakePostRepository = new Mock<IPostRepository>();
             var fakePost = new Post();
-            fakePostRepository.Setup(x => x.Create(fakePost)).Returns(fakePost);
+            fakePostRepository.Setup(x => x.Create(It.IsAny<Post>())).Returns(fakePost);
 
             var browser = new Browser(
                 cfg =>
@@ -96,6 +96,29 @@ namespace MicroBlog.Tests
             });
 
             Assert.Equal(HttpStatusCode.Created, result.StatusCode);
+        }
+
+        [Fact]
+        public void Should_Return_ServerError_If_Cannot_Created()
+        {
+            var fakePostRepository = new Mock<IPostRepository>();
+            var fakePost = new Post();
+            fakePostRepository.Setup(x => x.Create(fakePost)).Returns((Post)null);
+
+            var browser = new Browser(
+                cfg =>
+                {
+                    cfg.Module<BlogModule>();
+                    cfg.Dependencies<IPostRepository>(fakePostRepository.Object);
+                });
+
+            var result = browser.Post("/", with =>
+            {
+                with.HttpRequest();
+                with.FormValue("Content", "Test Content");
+            });
+
+            Assert.Equal(HttpStatusCode.InternalServerError, result.StatusCode);
         }
 
         #endregion
