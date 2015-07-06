@@ -12,6 +12,8 @@ namespace MicroBlog.Tests
 {
     public class BlogModuleTest
     {
+        #region Getting
+
         [Fact]
         public void Should_Return_OK_When_Queried_With_Id()
         {
@@ -73,6 +75,8 @@ namespace MicroBlog.Tests
             Assert.Equal(HttpStatusCode.NotFound, result.StatusCode);
         }
 
+        #endregion
+
         #region Creating
 
         [Fact]
@@ -119,6 +123,29 @@ namespace MicroBlog.Tests
             });
 
             Assert.Equal(HttpStatusCode.InternalServerError, result.StatusCode);
+        }
+
+        [Fact]
+        public void Should_Return_Unauthorized_If_InvalidUser_Creating()
+        {
+            var fakePostRepository = new Mock<IPostRepository>();
+            var fakePost = new Post();
+            fakePostRepository.Setup(x => x.Create(fakePost)).Returns((Post)null);
+
+            var browser = new Browser(
+                cfg =>
+                {
+                    cfg.Module<BlogModule>();
+                    cfg.Dependencies<IPostRepository>(fakePostRepository.Object);
+                });
+
+            var result = browser.Post("/", with =>
+            {
+                with.HttpRequest();
+                with.FormValue("Content", "Test Content");
+            });
+
+            Assert.Equal(HttpStatusCode.Unauthorized, result.StatusCode);
         }
 
         #endregion
