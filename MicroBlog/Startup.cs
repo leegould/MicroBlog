@@ -1,4 +1,5 @@
 ﻿using Microsoft.Owin.Extensions;
+
 using Owin;
 
 namespace MicroBlog
@@ -9,6 +10,7 @@ namespace MicroBlog
         {
             app.UseNancy();
             app.UseStageMarker(PipelineStage.MapHandler);
+
         }
     }
 }

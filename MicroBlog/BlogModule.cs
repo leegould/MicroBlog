@@ -2,6 +2,7 @@
 using MicroBlog.Models;
 using Nancy;
 using Nancy.ModelBinding;
+using Nancy.Security;
 
 namespace MicroBlog
 {
@@ -21,6 +22,8 @@ namespace MicroBlog
 
             Post["/"] = x =>
             {
+                this.RequiresAuthentication();
+
                 var newItem = this.Bind<Post>();
                 var item = postrepository.Create(newItem);
                 return item != null ? Response.AsJson(item, HttpStatusCode.Created) : HttpStatusCode.InternalServerError;
