@@ -91,6 +91,10 @@ namespace MicroBlog.Tests
                 {
                     cfg.Module<BlogModule>();
                     cfg.Dependencies<IPostRepository>(fakePostRepository.Object);
+                    cfg.RequestStartup((container, pipelines, context) =>
+                    {
+                        context.CurrentUser = new UserIdentity {UserName = "Test"};
+                    });
                 });
 
             var result = browser.Post("/", with =>
@@ -114,6 +118,10 @@ namespace MicroBlog.Tests
                 {
                     cfg.Module<BlogModule>();
                     cfg.Dependencies<IPostRepository>(fakePostRepository.Object);
+                    cfg.RequestStartup((container, pipelines, context) =>
+                    {
+                        context.CurrentUser = new UserIdentity { UserName = "Test" };
+                    });
                 });
 
             var result = browser.Post("/", with =>

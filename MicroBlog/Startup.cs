@@ -10,7 +10,6 @@ namespace MicroBlog
         {
             app.UseNancy();
             app.UseStageMarker(PipelineStage.MapHandler);
-
         }
     }
 }
