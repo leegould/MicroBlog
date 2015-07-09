@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using MicroBlog.Models;
+﻿using MicroBlog.Models;
 
 namespace MicroBlog.Interface
 {
@@ -13,5 +7,7 @@ namespace MicroBlog.Interface
         Post Get(int id);
 
         Post Create(Post post);
+
+        Post Update(Post post);
     }
 }

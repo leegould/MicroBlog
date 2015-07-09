@@ -28,6 +28,11 @@ namespace MicroBlog
                 var item = postrepository.Create(newItem);
                 return item != null ? Response.AsJson(item, HttpStatusCode.Created) : HttpStatusCode.InternalServerError;
             };
+
+            Put["/{id:int}"] = x =>
+            {
+                return HttpStatusCode.OK;
+            };
         }
     }
 }

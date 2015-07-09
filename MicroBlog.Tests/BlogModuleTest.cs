@@ -157,5 +157,36 @@ namespace MicroBlog.Tests
         }
 
         #endregion
+
+        #region Updating
+
+        [Fact]
+        public void Should_Return_OK_If_Updated()
+        {
+            var fakePostRepository = new Mock<IPostRepository>();
+            var fakePost = new Post();
+            fakePostRepository.Setup(x => x.Update(It.IsAny<Post>())).Returns(fakePost);
+
+            var browser = new Browser(
+                cfg =>
+                {
+                    cfg.Module<BlogModule>();
+                    cfg.Dependencies<IPostRepository>(fakePostRepository.Object);
+                    cfg.RequestStartup((container, pipelines, context) =>
+                    {
+                        context.CurrentUser = new UserIdentity { UserName = "Test" };
+                    });
+                });
+
+            var result = browser.Put("/1", with =>
+            {
+                with.HttpRequest();
+                with.FormValue("Content", "Test Content");
+            });
+
+            Assert.Equal(HttpStatusCode.OK, result.StatusCode);
+        }
+
+        #endregion
     }
 }
