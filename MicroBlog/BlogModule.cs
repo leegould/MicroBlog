@@ -31,7 +31,9 @@ namespace MicroBlog
 
             Put["/{id:int}"] = x =>
             {
-                return HttpStatusCode.OK;
+                var item = this.Bind<Post>();
+                var updatedItem = postrepository.Update(item);
+                return updatedItem != null ? Response.AsJson(updatedItem) : HttpStatusCode.InternalServerError;
             };
         }
     }

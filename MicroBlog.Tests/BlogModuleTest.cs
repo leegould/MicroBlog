@@ -187,6 +187,32 @@ namespace MicroBlog.Tests
             Assert.Equal(HttpStatusCode.OK, result.StatusCode);
         }
 
+        [Fact]
+        public void Should_Return_ServerError_If_Cannot_Updated()
+        {
+            var fakePostRepository = new Mock<IPostRepository>();
+            fakePostRepository.Setup(x => x.Update(It.IsAny<Post>())).Returns((Post)null);
+
+            var browser = new Browser(
+                cfg =>
+                {
+                    cfg.Module<BlogModule>();
+                    cfg.Dependencies<IPostRepository>(fakePostRepository.Object);
+                    cfg.RequestStartup((container, pipelines, context) =>
+                    {
+                        context.CurrentUser = new UserIdentity { UserName = "Test" };
+                    });
+                });
+
+            var result = browser.Put("/999", with =>
+            {
+                with.HttpRequest();
+                with.FormValue("Content", "Test Content");
+            });
+
+            Assert.Equal(HttpStatusCode.InternalServerError, result.StatusCode);
+        }
+
         #endregion
     }
 }
