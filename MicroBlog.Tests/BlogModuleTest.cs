@@ -213,6 +213,28 @@ namespace MicroBlog.Tests
             Assert.Equal(HttpStatusCode.InternalServerError, result.StatusCode);
         }
 
+        [Fact]
+        public void Should_Return_Unauthorized_If_InvalidUser_Updating()
+        {
+            var fakePostRepository = new Mock<IPostRepository>();
+            fakePostRepository.Setup(x => x.Update(It.IsAny<Post>())).Returns((Post)null);
+
+            var browser = new Browser(
+                cfg =>
+                {
+                    cfg.Module<BlogModule>();
+                    cfg.Dependencies<IPostRepository>(fakePostRepository.Object);
+                });
+
+            var result = browser.Put("/1", with =>
+            {
+                with.HttpRequest();
+                with.FormValue("Content", "Test Content");
+            });
+
+            Assert.Equal(HttpStatusCode.Unauthorized, result.StatusCode);
+        }
+
         #endregion
     }
 }

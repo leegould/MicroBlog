@@ -31,6 +31,8 @@ namespace MicroBlog
 
             Put["/{id:int}"] = x =>
             {
+                this.RequiresAuthentication();
+
                 var item = this.Bind<Post>();
                 var updatedItem = postrepository.Update(item);
                 return updatedItem != null ? Response.AsJson(updatedItem) : HttpStatusCode.InternalServerError;
