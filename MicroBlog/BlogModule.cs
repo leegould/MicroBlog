@@ -37,6 +37,11 @@ namespace MicroBlog
                 var updatedItem = postrepository.Update(item);
                 return updatedItem != null ? Response.AsJson(updatedItem) : HttpStatusCode.InternalServerError;
             };
+
+            Delete["/{id:int}"] = x =>
+            {
+                return HttpStatusCode.OK;
+            };
         }
     }
 }

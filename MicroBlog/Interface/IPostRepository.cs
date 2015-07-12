@@ -9,5 +9,7 @@ namespace MicroBlog.Interface
         Post Create(Post post);
 
         Post Update(Post post);
+
+        bool Delete(int id);
     }
 }

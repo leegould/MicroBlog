@@ -236,5 +236,35 @@ namespace MicroBlog.Tests
         }
 
         #endregion
+
+        #region Delete
+
+        [Fact]
+        public void Should_Return_OK_If_Deleted()
+        {
+            var fakePostRepository = new Mock<IPostRepository>();
+            fakePostRepository.Setup(x => x.Delete(It.IsAny<int>())).Returns(true);
+
+            var browser = new Browser(
+                cfg =>
+                {
+                    cfg.Module<BlogModule>();
+                    cfg.Dependencies<IPostRepository>(fakePostRepository.Object);
+                    cfg.RequestStartup((container, pipelines, context) =>
+                    {
+                        context.CurrentUser = new UserIdentity { UserName = "Test" };
+                    });
+                });
+
+            var result = browser.Delete("/1", with =>
+            {
+                with.HttpRequest();
+                with.FormValue("Content", "Test Content");
+            });
+
+            Assert.Equal(HttpStatusCode.OK, result.StatusCode);
+        }
+
+        #endregion
     }
 }
