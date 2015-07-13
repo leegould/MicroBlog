@@ -40,7 +40,8 @@ namespace MicroBlog
 
             Delete["/{id:int}"] = x =>
             {
-                return HttpStatusCode.OK;
+                var result = postRepository.Delete(x.id);
+                return (result) ? HttpStatusCode.OK : HttpStatusCode.InternalServerError;
             };
         }
     }
