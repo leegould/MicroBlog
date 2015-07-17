@@ -22,7 +22,7 @@ namespace MicroBlog
 
             Post["/"] = x =>
             {
-                this.RequiresAuthentication();
+                //this.RequiresAuthentication();
 
                 var newItem = this.Bind<Post>();
                 var item = postrepository.Create(newItem);

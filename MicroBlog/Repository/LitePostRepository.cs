@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data.SQLite;
+using System.IO;
 
+using Dapper;
 using Dapper.Contrib.Extensions;
 
 using MicroBlog.Interface;
@@ -10,10 +12,20 @@ namespace MicroBlog.Repository
 {
     public class LitePostRepository : IPostRepository
     {
-        private const string Connectionstring = "Data Source=:memory:;Version=3;New=True;";
+        //private const string Connectionstring = "Data Source=:memory:;Version=3;New=True;";
+        private const string DbSource = "|DataDirectory|microblog.sqlite";
+        private const string Connectionstring = "Data Source=" + DbSource +";Version=3;New=True;";
 
         public LitePostRepository() 
         {
+            if (!File.Exists(DbSource))
+            {
+                using (var conn = new SQLiteConnection(Connectionstring))
+                {
+                    conn.Open();
+                    conn.Execute(@" create table IF NOT EXISTS Posts (Id INTEGER PRIMARY KEY, Content nvarchar(1000) not null) ");
+                }
+            }
         }
 
         public Post Get(int id)
