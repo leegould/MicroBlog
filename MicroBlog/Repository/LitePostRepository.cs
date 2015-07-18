@@ -18,14 +18,14 @@ namespace MicroBlog.Repository
 
         public LitePostRepository() 
         {
-            if (!File.Exists(DbSource))
-            {
+            //if (!File.Exists(DbSource))
+            //{
                 using (var conn = new SQLiteConnection(Connectionstring))
                 {
                     conn.Open();
                     conn.Execute(@" create table IF NOT EXISTS Posts (Id INTEGER PRIMARY KEY, Content nvarchar(1000) not null) ");
                 }
-            }
+            //}
         }
 
         public Post Get(int id)
@@ -44,6 +44,11 @@ namespace MicroBlog.Repository
 
         public Post Create(Post post)
         {
+            if (post == null)
+            {
+                return null;
+            }
+
             using (var conn = new SQLiteConnection(Connectionstring))
             {
                 conn.Open();
@@ -54,12 +59,7 @@ namespace MicroBlog.Repository
                 conn.Close();
             }
 
-            if (post.Id > 0)
-            {
-                return post;
-            }
-
-            return null;
+            return post.Id > 0 ? post : null;
         }
 
         public Post Update(Post post)

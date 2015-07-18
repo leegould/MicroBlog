@@ -22,7 +22,7 @@ namespace MicroBlog
 
             Post["/"] = x =>
             {
-                //this.RequiresAuthentication();
+                this.RequiresAuthentication();
 
                 var newItem = this.Bind<Post>();
                 var item = postrepository.Create(newItem);
@@ -34,6 +34,7 @@ namespace MicroBlog
                 this.RequiresAuthentication();
 
                 var item = this.Bind<Post>();
+                
                 var updatedItem = postrepository.Update(item);
                 return updatedItem != null ? Response.AsJson(updatedItem) : HttpStatusCode.InternalServerError;
             };

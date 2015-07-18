@@ -104,11 +104,13 @@
   <ItemGroup>
     <Compile Include="BlogModule.cs" />
     <Compile Include="Interface\IPostRepository.cs" />
+    <Compile Include="MicroBlogBootstrapper.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\UserIdentity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\LitePostRepository.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="UserValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

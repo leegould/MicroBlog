@@ -105,6 +105,30 @@ namespace MicroBlog.Tests
 
             Assert.Equal(HttpStatusCode.Created, result.StatusCode);
         }
+        [Fact]
+        public void Should_Return_ServerError_If_Cannot_Bind()
+        {
+            var fakePostRepository = new Mock<IPostRepository>();
+            fakePostRepository.Setup(x => x.Create((Post)null)).Returns((Post)null);
+
+            var browser = new Browser(
+                cfg =>
+                {
+                    cfg.Module<BlogModule>();
+                    cfg.Dependencies<IPostRepository>(fakePostRepository.Object);
+                    cfg.RequestStartup((container, pipelines, context) =>
+                    {
+                        context.CurrentUser = new UserIdentity { UserName = "Test" };
+                    });
+                });
+
+            var result = browser.Post("/", with =>
+            {
+                with.HttpRequest();
+            });
+
+            Assert.Equal(HttpStatusCode.InternalServerError, result.StatusCode);
+        }
 
         [Fact]
         public void Should_Return_ServerError_If_Cannot_Created()
