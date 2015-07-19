@@ -1,4 +1,5 @@
-﻿using MicroBlog.Models;
+﻿using System.Threading.Tasks;
+using MicroBlog.Models;
 
 namespace MicroBlog.Interface
 {
@@ -8,7 +9,7 @@ namespace MicroBlog.Interface
 
         Post Create(Post post);
 
-        Post Update(Post post);
+        Task<Post> Update(Post post);
 
         bool Delete(int id);
     }

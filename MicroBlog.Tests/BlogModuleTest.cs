@@ -1,4 +1,5 @@
-﻿using MicroBlog.Interface;
+﻿using System.Threading.Tasks;
+using MicroBlog.Interface;
 using MicroBlog.Models;
 
 using Moq;
@@ -189,12 +190,12 @@ namespace MicroBlog.Tests
         {
             var fakePostRepository = new Mock<IPostRepository>();
             var fakePost = new Post();
-            fakePostRepository.Setup(x => x.Update(It.IsAny<Post>())).Returns(fakePost);
+            fakePostRepository.Setup(x => x.Update(It.IsAny<Post>())).Returns(Task.FromResult(fakePost));
 
             var browser = new Browser(
                 cfg =>
                 {
-                    cfg.Module<BlogModule>();
+                    cfg.Module<BlogModule>(); 
                     cfg.Dependencies<IPostRepository>(fakePostRepository.Object);
                     cfg.RequestStartup((container, pipelines, context) =>
                     {
@@ -215,7 +216,7 @@ namespace MicroBlog.Tests
         public void Should_Return_ServerError_If_Cannot_Updated()
         {
             var fakePostRepository = new Mock<IPostRepository>();
-            fakePostRepository.Setup(x => x.Update(It.IsAny<Post>())).Returns((Post)null);
+            fakePostRepository.Setup(x => x.Update(It.IsAny<Post>())).Returns(Task.FromResult((Post)null));
 
             var browser = new Browser(
                 cfg =>
@@ -241,7 +242,7 @@ namespace MicroBlog.Tests
         public void Should_Return_Unauthorized_If_InvalidUser_Updating()
         {
             var fakePostRepository = new Mock<IPostRepository>();
-            fakePostRepository.Setup(x => x.Update(It.IsAny<Post>())).Returns((Post)null);
+            fakePostRepository.Setup(x => x.Update(It.IsAny<Post>())).Returns(Task.FromResult((Post)null));
 
             var browser = new Browser(
                 cfg =>

@@ -29,14 +29,13 @@ namespace MicroBlog
                 return item != null ? Response.AsJson(item, HttpStatusCode.Created) : HttpStatusCode.InternalServerError;
             };
 
-            Put["/{id:int}"] = x =>
+            Put["/{id:int}", true] = async (x, ct) =>
             {
                 this.RequiresAuthentication();
 
-                var item = this.Bind<Post>();
-                
-                var updatedItem = postrepository.Update(item);
-                return updatedItem != null ? Response.AsJson(updatedItem) : HttpStatusCode.InternalServerError;
+                var updatedItem = this.Bind<Post>();
+                var item = await postrepository.Update(updatedItem);
+                return item != null ? Response.AsJson(item) : HttpStatusCode.InternalServerError;
             };
 
             Delete["/{id:int}"] = x =>

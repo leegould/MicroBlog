@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.SQLite;
-using System.IO;
-
+//using System.IO;
+using System.Threading.Tasks;
 using Dapper;
 using Dapper.Contrib.Extensions;
 
@@ -62,9 +62,24 @@ namespace MicroBlog.Repository
             return post.Id > 0 ? post : null;
         }
 
-        public Post Update(Post post)
+        public async Task<Post> Update(Post post)
         {
-            throw new NotImplementedException();
+            if (post == null)
+            {
+                return null;
+            }
+
+            bool result;
+            using (var conn = new SQLiteConnection(Connectionstring))
+            {
+                conn.Open();
+
+                result = await conn.UpdateAsync(post);
+
+                conn.Close();
+            }
+
+            return result ? post : null;
         }
 
         public bool Delete(int id)
