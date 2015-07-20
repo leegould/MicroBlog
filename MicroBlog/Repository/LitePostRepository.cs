@@ -1,7 +1,6 @@
-﻿using System;
-using System.Data.SQLite;
-//using System.IO;
+﻿using System.Data.SQLite;
 using System.Threading.Tasks;
+
 using Dapper;
 using Dapper.Contrib.Extensions;
 
@@ -12,20 +11,16 @@ namespace MicroBlog.Repository
 {
     public class LitePostRepository : IPostRepository
     {
-        //private const string Connectionstring = "Data Source=:memory:;Version=3;New=True;";
         private const string DbSource = "|DataDirectory|microblog.sqlite";
         private const string Connectionstring = "Data Source=" + DbSource +";Version=3;New=True;";
 
         public LitePostRepository() 
         {
-            //if (!File.Exists(DbSource))
-            //{
-                using (var conn = new SQLiteConnection(Connectionstring))
-                {
-                    conn.Open();
-                    conn.Execute(@" create table IF NOT EXISTS Posts (Id INTEGER PRIMARY KEY, Content nvarchar(1000) not null) ");
-                }
-            //}
+            using (var conn = new SQLiteConnection(Connectionstring))
+            {
+                conn.Open();
+                conn.Execute(@" create table IF NOT EXISTS Posts (Id INTEGER PRIMARY KEY, Content nvarchar(1000) not null) ");
+            }
         }
 
         public Post Get(int id)
@@ -84,7 +79,27 @@ namespace MicroBlog.Repository
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            if (id > 0)
+            {
+
+                using (var conn = new SQLiteConnection(Connectionstring))
+                {
+                    conn.Open();
+
+                    var item = conn.Get<Post>(id);
+
+                    if (item != null)
+                    {
+                        result = conn.Delete(item);
+                    }
+
+                    conn.Close();
+                }
+            }
+
+            return result;
         }
     }
 }
