@@ -9,7 +9,7 @@ namespace MicroBlog
     {
         public IUserIdentity Validate(string username, string password)
         {
-            if (username == "demo" && password == "demo")
+            if (username == "microblog" && password == "microblog")
             {
                 return new UserIdentity { UserName = username };
             }
