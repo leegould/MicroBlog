@@ -10,7 +10,7 @@ namespace MicroBlog
     {
         private readonly IPostRepository postRepository;
 
-        public BlogModule(IPostRepository postrepository) : base("/api")
+        public BlogModule(IPostRepository postrepository) //: base("/api") // This should be done in a virtual dir
         {
             postRepository = postrepository;
 
