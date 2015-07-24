@@ -7,20 +7,39 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     </head>
-    <body>
-        <div id="content"></div>
-        <script type="text/jsx">
+<body>
+    <div id="content"></div>
+<script type="text/jsx">
 
-            var CommentBox = React.createClass({
-                render: function() {
-                    return (
-                        <div classname="commentBox">Testing a comment box.</div>
-                    );
-                }
-            });
+        var mockdata = [
+            {id: 1, content: "Test Content 1"},
+            {id: 2, content: "Test Content 2"}
+        ];
 
-            React.render(<CommentBox />, document.getElementById('content'));
+        var BlogSummary = React.createClass({
+            render: function() {
+                <div>
+                    {this.props.blog.content}
+                </div>
+            }
+        });
 
-        </script>
-    </body>
+        var BlogList = React.createClass({
+            render: function() {
+                var rows = [];
+                this.props.products.forEach(function(blog) {
+                    this.rows.push(<BlogSummary blog={blog}/>);
+                }.bind(this));
+                return (
+                    <div class="container">
+                        {rows}
+                    </div>
+                );
+            }
+        });
+
+        React.render(<BlogList blogs={mockdata} />, document.getElementById('content'));
+
+    </script>
+</body>
 </html>
