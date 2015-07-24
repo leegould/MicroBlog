@@ -9,6 +9,7 @@
     </head>
 <body>
     <div id="content"></div>
+
 <script type="text/jsx">
 
         var mockdata = [
@@ -18,17 +19,20 @@
 
         var BlogSummary = React.createClass({
             render: function() {
-                <div>
+                return(<div>
                     {this.props.blog.content}
-                </div>
+                </div>);
             }
         });
 
         var BlogList = React.createClass({
             render: function() {
                 var rows = [];
-                this.props.products.forEach(function(blog) {
-                    this.rows.push(<BlogSummary blog={blog}/>);
+                
+                if (this.props.blogs == undefined) { return false; }
+
+                this.props.blogs.forEach(function(blog) {
+                    rows.push(<BlogSummary blog={blog}/>);
                 }.bind(this));
                 return (
                     <div class="container">
@@ -38,7 +42,7 @@
             }
         });
 
-        React.render(<BlogList blogs={mockdata} />, document.getElementById('content'));
+        React.render(<BlogList blogs={ mockdata } />, document.getElementById('content'));
 
     </script>
 </body>
