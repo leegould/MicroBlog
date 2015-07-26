@@ -1,48 +1,53 @@
 ﻿<!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8" />
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Hello React</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </head>
 <body>
-    <div id="content"></div>
+    <div id="content" class="container"></div>
 
 <script type="text/jsx">
 
         var mockdata = [
-            {id: 1, content: "Test Content 1"},
-            {id: 2, content: "Test Content 2"}
+            {id: 1, title: "Test Title 1", content: "Test Content 1"},
+            {id: 2, title: "Test Title 2", content: "Test Content 2"}
         ];
 
         var BlogSummary = React.createClass({
             render: function() {
-                return(<div>
-                    {this.props.blog.content}
-                </div>);
+                return(<div class="row">
+                        <div>{this.props.blog.title}</div>
+                        <div>{this.props.blog.content}</div>
+                    </div>);
             }
         });
 
         var BlogList = React.createClass({
             render: function() {
                 var rows = [];
-                
+
                 if (this.props.blogs == undefined) { return false; }
 
                 this.props.blogs.forEach(function(blog) {
-                    rows.push(<BlogSummary blog={blog}/>);
+                    rows.push(<BlogSummary blog={blog} />);
                 }.bind(this));
-                return (
-                    <div class="container">
-                        {rows}
-                    </div>
+                return (<div>
+                    {rows}
+                </div>
                 );
             }
         });
 
-        React.render(<BlogList blogs={ mockdata } />, document.getElementById('content'));
+        React.render(
+        <BlogList blogs={ mockdata } />, document.getElementById('content'));
 
     </script>
 </body>
