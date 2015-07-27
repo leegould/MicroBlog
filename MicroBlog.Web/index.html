@@ -12,9 +12,12 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </head>
 <body>
+    <div>
+        <h2>Blogs</h2>
+    </div>
     <div id="content" class="container"></div>
 
-<script type="text/jsx">
+    <script type="text/jsx">
 
         var mockdata = [
             {id: 1, title: "Test Title 1", content: "Test Content 1"},
@@ -24,8 +27,8 @@
         var BlogSummary = React.createClass({
             render: function() {
                 return(<div class="row">
-                        <div>{this.props.blog.title}</div>
-                        <div>{this.props.blog.content}</div>
+                        <div><a href="blog.html?id={this.props.blog.id}">{this.props.blog.title}</a></div>
+                        <div><a href="blog.html?id={this.props.blog.id}">{this.props.blog.content}</a></div>
                     </div>);
             }
         });
