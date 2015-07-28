@@ -10,11 +10,11 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="/css/bloglist.css">
     </head>
 <body>
-    <div>
-        <h2>Blogs</h2>
-    </div>
+
     <div id="content" class="container"></div>
 
     <script type="text/jsx">
@@ -26,9 +26,9 @@
 
         var BlogSummary = React.createClass({
             render: function() {
-                return(<div class="row">
-                        <div><a href="blog.html?id={this.props.blog.id}">{this.props.blog.title}</a></div>
-                        <div><a href="blog.html?id={this.props.blog.id}">{this.props.blog.content}</a></div>
+                return(<div className="row">
+                        <div className="blogheader"><a href={this.props.blog.id}>{this.props.blog.title}</a></div>
+                        <div><a href={this.props.blog.id}>{this.props.blog.content}</a></div>
                     </div>);
             }
         });
@@ -43,14 +43,14 @@
                     rows.push(<BlogSummary blog={blog} />);
                 }.bind(this));
                 return (<div>
+                    <h1>My Blogs</h1>
                     {rows}
                 </div>
                 );
             }
         });
 
-        React.render(
-        <BlogList blogs={ mockdata } />, document.getElementById('content'));
+        React.render(<BlogList blogs={ mockdata } />, document.getElementById('content'));
 
     </script>
 </body>

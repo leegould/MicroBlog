@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.html" />
+    <Content Include="css\bloglist.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
