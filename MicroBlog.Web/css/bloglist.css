@@ -1,12 +1,16 @@
 ﻿h1 {
-    margin-bottom: 20px;
+    margin-bottom: 60px;
 }
 
 .row {
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }
 
 .blogheader {
     font-weight: bold;
     font-size: large;
+}
+
+a {
+    color: #000000;
 }

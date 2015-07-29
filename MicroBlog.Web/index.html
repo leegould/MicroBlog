@@ -4,12 +4,23 @@
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Hello React</title>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script data-main="scripts/app" src="/Scripts/lib/require.js"></script>
+
+        <script type="text/javascript">
+
+            require(["jquery"]);
+
+        </script>
+
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
+
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/react-router/0.13.3/ReactRouter.min.js"></script>-->
+
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
 
         <link rel="stylesheet" href="/css/bloglist.css">
     </head>
@@ -17,8 +28,8 @@
 
     <div id="content" class="container"></div>
 
-    <script type="text/jsx">
-
+    <!--<script type="text/jsx">
+        
         var mockdata = [
             {id: 1, title: "Test Title 1", content: "Test Content 1"},
             {id: 2, title: "Test Title 2", content: "Test Content 2"}
@@ -52,6 +63,6 @@
 
         React.render(<BlogList blogs={ mockdata } />, document.getElementById('content'));
 
-    </script>
+    </script>-->
 </body>
 </html>
