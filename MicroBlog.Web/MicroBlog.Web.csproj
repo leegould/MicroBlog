@@ -59,11 +59,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="packages.config" />
-    <None Include="Scripts\lib\jquery-2.1.4.intellisense.js" />
-    <Content Include="Scripts\lib\jquery-2.1.4.js" />
-    <Content Include="Scripts\lib\jquery-2.1.4.min.js" />
-    <Content Include="Scripts\lib\jquery-2.1.4.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -75,12 +75,16 @@
     <Content Include="index.html" />
     <Content Include="css\bloglist.css" />
     <Content Include="Scripts\app.js" />
-    <Content Include="Scripts\lib\r.js" />
-    <Content Include="Scripts\lib\require.js" />
+    <Content Include="Scripts\r.js" />
+    <Content Include="Scripts\require.js" />
+    <Content Include="Scripts\requireconfig.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Scripts\lib\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

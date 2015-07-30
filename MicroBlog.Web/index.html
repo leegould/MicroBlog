@@ -5,13 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Hello React</title>
 
-        <script data-main="scripts/app" src="/Scripts/lib/require.js"></script>
+        <script type="text/javascript" src="/Scripts/require.js"></script>
+        <script type="text/javascript" src="/Scripts/requireconfig.js"></script>
 
-        <script type="text/javascript">
+        <!--<script type="text/javascript">
 
-            require(["jquery"]);
+            require(["jquery", "react", "reacttransformer"]);
 
-        </script>
+        </script>-->
 
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
@@ -28,8 +29,9 @@
 
     <div id="content" class="container"></div>
 
-    <!--<script type="text/jsx">
-        
+    <script type="text/jsx">
+        require(["jquery", "react", "reacttransformer"]);
+    
         var mockdata = [
             {id: 1, title: "Test Title 1", content: "Test Content 1"},
             {id: 2, title: "Test Title 2", content: "Test Content 2"}
@@ -63,6 +65,6 @@
 
         React.render(<BlogList blogs={ mockdata } />, document.getElementById('content'));
 
-    </script>-->
+    </script>
 </body>
 </html>
