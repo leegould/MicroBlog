@@ -59,11 +59,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
-    <Content Include="Scripts\jquery-2.1.4.js" />
-    <Content Include="Scripts\jquery-2.1.4.min.js" />
-    <Content Include="Scripts\jquery-2.1.4.min.map" />
-    <Content Include="packages.config" />
+    <Content Include="Scripts\riot\container.tags" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -74,10 +70,6 @@
   <ItemGroup>
     <Content Include="index.html" />
     <Content Include="css\bloglist.css" />
-    <None Include="Scripts\main.jsx" />
-    <Content Include="Scripts\r.js" />
-    <Content Include="Scripts\require.js" />
-    <Content Include="Scripts\requireconfig.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

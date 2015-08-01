@@ -5,67 +5,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Hello React</title>
 
-        <script type="text/javascript" src="/Scripts/require.js"></script>
-        <script type="text/javascript" src="/Scripts/requireconfig.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-        <!--<script type="text/javascript">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/riot/2.2.2/riot+compiler.min.js"></script>
 
-            require(["jquery", "react", "reacttransformer"]);
-
-        </script>-->
-
-        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
-        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
-
-        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/react-router/0.13.3/ReactRouter.min.js"></script>-->
-
-        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
         <link rel="stylesheet" href="/css/bloglist.css">
     </head>
 <body>
 
-    <div id="content" class="container"></div>
+    <riot-container class="container"></riot-container>
 
-<!--<script type="text/jsx">
-        require(["jquery", "react", "reacttransformer"], function()
-    
-            var mockdata = [
-                {id: 1, title: "Test Title 1", content: "Test Content 1"},
-                {id: 2, title: "Test Title 2", content: "Test Content 2"}
-            ];
-
-            var BlogSummary = React.createClass({
-                render: function() {
-                    return(<div className="row">
-                            <div className="blogheader"><a href={this.props.blog.id}>{this.props.blog.title}</a></div>
-                            <div><a href={this.props.blog.id}>{this.props.blog.content}</a></div>
-                        </div>);
-                }
-            });
-
-            var BlogList = React.createClass({
-                render: function() {
-                    var rows = [];
-
-                    if (this.props.blogs == undefined) { return false; }
-
-                    this.props.blogs.forEach(function(blog) {
-                        rows.push(<BlogSummary blog={blog} />);
-                    }.bind(this));
-                    return (<div>
-                        <h1>My Blogs</h1>
-                        {rows}
+    <script type="riot/tag">
+        <riot-container>
+            <div class="container">
+                <h1>My Blogs</h1>
+                <div each={ opts.data }>
+                    
+                    <div classname="row">
+                        <div classname="blogheader"><a href={ id }>{ title }</a></div>
+                        <div><a href={ id }>{ content }</a></div>
                     </div>
-                    );
-                }
-            });
+                </div>
+            </div>
+        </riot-container>
+    </script>
 
-            React.render(<BlogList blogs={ mockdata } />, document.getElementById('content'));
-        });
+    <script>
+        var mockdata = [
+                    { id: 1, title: "Test Title 1", content: "Test Content 1" },
+                    { id: 2, title: "Test Title 2", content: "Test Content 2" }
+        ];
 
-    </script>-->
+        riot.mount('riot-container', { data: mockdata });
+    </script>
+
 </body>
 </html>
