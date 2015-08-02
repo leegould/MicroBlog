@@ -34,12 +34,29 @@
     </script>
 
     <script>
-        var mockdata = [
-                    { id: 1, title: "Test Title 1", content: "Test Content 1" },
-                    { id: 2, title: "Test Title 2", content: "Test Content 2" }
-        ];
+        $(document).ready(function() {
+            
+            $.getJSON("api/", function(data) {
+                var blogdata = [];
+                $.forEach(data, function(item) {
+                    blogdata.push(item);
+                });
 
-        riot.mount('riot-container', { data: mockdata });
+                if (blogdata.length === 0) {
+                    blogdata.push({ id: 0, title: "There are no blogs created yet.", content: "Click here to add one" });
+                }
+
+                riot.mount('riot-container', { data: blogdata });
+            });
+            
+            
+            //var mockdata = [
+            //    { id: 1, title: "Test Title 1", content: "Test Content 1" },
+            //    { id: 2, title: "Test Title 2", content: "Test Content 2" }
+            //];
+
+            //riot.mount('riot-container', { data: mockdata });
+        });
     </script>
 
 </body>
