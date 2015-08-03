@@ -1,4 +1,6 @@
-﻿using System.Data.SQLite;
+﻿using System.Collections.Generic;
+using System.Data.SQLite;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Dapper;
@@ -20,6 +22,20 @@ namespace MicroBlog.Repository
             {
                 conn.Open();
                 conn.Execute(@" create table IF NOT EXISTS Posts (Id INTEGER PRIMARY KEY, Content nvarchar(1000) not null) ");
+            }
+        }
+
+        public List<Post> GetAll()
+        {
+            using (var conn = new SQLiteConnection(Connectionstring))
+            {
+                conn.Open();
+
+                var p = conn.GetAll<Post>().ToList();
+
+                conn.Close();
+
+                return p;
             }
         }
 

@@ -2,6 +2,7 @@
 using MicroBlog.Models;
 using Nancy;
 using Nancy.ModelBinding;
+using Nancy.OData;
 using Nancy.Security;
 
 namespace MicroBlog
@@ -13,6 +14,11 @@ namespace MicroBlog
         public BlogModule(IPostRepository postrepository) //: base("/api") // This should be done in a virtual dir
         {
             postRepository = postrepository;
+
+            Get["/"] = x =>
+            {
+                return Response.AsJson(Context.ApplyODataUriFilter(postrepository.GetAll()));
+            };
 
             Get["/{id:int}"] = x =>
             {

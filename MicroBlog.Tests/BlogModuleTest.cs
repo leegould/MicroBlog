@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MicroBlog.Interface;
 using MicroBlog.Models;
 
@@ -13,6 +14,50 @@ namespace MicroBlog.Tests
 {
     public class BlogModuleTest
     {
+        #region Getting Lists
+
+        [Fact]
+        public void Should_Return_OK_When_Queried()
+        {
+            var fakePostRepository = new Mock<IPostRepository>();
+            fakePostRepository.Setup(x => x.GetAll()).Returns(new List<Post>());
+
+            var browser = new Browser(cfg =>
+            {
+                cfg.Dependencies<IPostRepository>(fakePostRepository.Object);
+                cfg.Module<BlogModule>();
+            });
+
+            var result = browser.Get("/", with =>
+            {
+                with.HttpRequest();
+            });
+
+            Assert.Equal(HttpStatusCode.OK, result.StatusCode);
+        }
+
+        [Fact]
+        public void Should_Return_ListOfPosts_When_Queried()
+        {
+            var fakePostRepository = new Mock<IPostRepository>();
+            fakePostRepository.Setup(x => x.GetAll()).Returns(new List<Post>());
+
+            var browser = new Browser(cfg =>
+            {
+                cfg.Dependencies<IPostRepository>(fakePostRepository.Object);
+                cfg.Module<BlogModule>();
+            });
+
+            var result = browser.Get("/", with =>
+            {
+                with.HttpRequest();
+            });
+
+            Assert.Equal(typeof(List<Post>), result.Body.DeserializeJson<List<Post>>().GetType());
+        }
+
+        #endregion
+
         #region Getting
 
         [Fact]
