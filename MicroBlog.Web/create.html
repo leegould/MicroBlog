@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Blogs</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/riot/2.2.2/riot+compiler.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/css/bloglist.css">
+</head>
+<body>
+
+    <riot-create></riot-create>
+
+<script type="riot/tag">
+        <riot-create>
+            <div class="container">
+                <form id="newpost">
+                    <h1>Enter the content for your new blogpost</h1>
+                    <div>
+                        <textarea name="content"></textarea>
+                    </div>
+                    <div>
+                        <input type="submit" value="Submit" />
+                    </div>
+                </form>
+            </div>
+        </riot-create>
+    </script>
+
+    <script>
+        $(document).ready(function() {
+
+            riot.mount('riot-create');
+
+            $("#newpost").submit(function (event) {
+                alert("Handler for .submit() called.");
+                event.preventDefault();
+            });
+        });
+    </script>
+</body>
+</html>
