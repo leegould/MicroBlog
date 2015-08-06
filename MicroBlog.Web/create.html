@@ -13,6 +13,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="/css/bloglist.css">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/medium-editor/5.5.4/js/medium-editor.min.js"></script>
 </head>
 <body>
 
@@ -24,7 +26,9 @@
                 <form id="newpost">
                     <h1>Enter the content for your new blogpost</h1>
                     <div>
-                        <textarea name="content"></textarea>
+                        <div id="editor">
+                            Test
+                        </div>
                     </div>
                     <div>
                         <input type="submit" value="Submit" />
@@ -43,6 +47,8 @@
                 alert("Handler for .submit() called.");
                 event.preventDefault();
             });
+
+            new MediumEditor('.editor');
         });
     </script>
 </body>
