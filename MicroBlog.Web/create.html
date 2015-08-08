@@ -45,6 +45,28 @@
             riot.mount('riot-create');
 
             $("#newpost").submit(function (event) {
+
+                var sendInfo = {
+                    Title: 'Test blog title',
+                    Content: $('.editor').val()
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "/api/",
+                    dataType: "json",
+                    success: function (msg) {
+                        if (msg) {
+                            alert("Created!" + msg);
+                            //location.reload(true);
+                        } else {
+                            alert("Cannot add to list !");
+                        }
+                    },
+
+                    data: sendInfo
+                });
+
                 alert("Handler for .submit() called.");
                 event.preventDefault();
             });
