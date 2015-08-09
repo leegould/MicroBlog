@@ -60,6 +60,7 @@
                 console.log(sendInfo);
 
                 request = $.ajax({
+                    beforeSend: function (xhr) { xhr.setRequestHeader("Authorization", "Basic " + btoa("microblog" + ":" + "microblog")); },
                     type: "POST",
                     url: "/api/",
                     dataType: "json",

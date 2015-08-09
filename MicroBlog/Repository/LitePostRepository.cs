@@ -21,7 +21,7 @@ namespace MicroBlog.Repository
             using (var conn = new SQLiteConnection(Connectionstring))
             {
                 conn.Open();
-                conn.Execute(@" create table IF NOT EXISTS Posts (Id INTEGER PRIMARY KEY, Content nvarchar(1000) not null) ");
+                conn.Execute(@" create table IF NOT EXISTS Posts (Id INTEGER PRIMARY KEY, Title nvarchar(255), Content nvarchar(1000) not null) ");
             }
         }
 
@@ -41,7 +41,7 @@ namespace MicroBlog.Repository
 
         public Post Get(int id)
         {
-            using (var conn = new SQLiteConnection(Connectionstring))
+            using (var conn = new SQLiteConnection(Connectionstring)) 
             {
                 conn.Open();
 
