@@ -54,7 +54,7 @@
 
                 var sendInfo = {
                     Title: 'Test blog title',
-                    Content: $('.editor').val()
+                    Content: $('.editor').html()
                 }
 
                 console.log(sendInfo);
@@ -66,10 +66,10 @@
                     dataType: "json",
                     success: function (msg) {
                         if (msg) {
-                            alert("Created!" + msg);
+                            console.log("Created!" + msg);
                             //location.reload(true);
                         } else {
-                            alert("Cannot add to list !");
+                            console.log("Cannot add to list !");
                         }
                     },
 
@@ -79,7 +79,7 @@
                 // Callback handler that will be called on success
                 request.done(function (response, textStatus, jqXHR) {
                     // Log a message to the console
-                    console.log("Hooray, it worked!");
+                    console.log("Blog Created!");
                 });
 
                 // Callback handler that will be called on failure
@@ -95,11 +95,11 @@
                 // if the request failed or succeeded
                 request.always(function () {
                     // Reenable the inputs
-                    console.log("always.");
+                    //console.log("always.");
                     //$inputs.prop("disabled", false);
                 });
 
-                alert("Handler for .submit() called.");
+                //alert("Handler for .submit() called.");
                 event.preventDefault();
             });
 
