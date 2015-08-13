@@ -47,11 +47,13 @@
         $(document).ready(function() {
             
             $.getJSON("api/", function(data) {
-                var blogdata = [];
-                $.each(data, function(item) {
-                    blogdata.push(item);
-                });
-                console.log(blogdata);
+                var blogdata = data;
+                //console.log(data);
+                //$.each(data, function (item) {
+                //    console.log(item);
+                //    blogdata.push(item);
+                //});
+                //console.log(blogdata);
 
                 if (blogdata.length === 0) {
                     //blogdata.push({ id: 0, title: "There are no blogs created yet.", content: "Click here to add one" });
