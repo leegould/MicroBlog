@@ -36,15 +36,19 @@
                     
                     <div classname="row">
                         <div classname="blogheader"><a href={ id }>{ title }</a></div>
-                        <div>
-                            { content }
-                        </div>
+                        <raw content="{ content }"/>
                     </div>
                 </div>
             </div>
         </riot-container>
     </script>
 
+    <script type="riot/tag">
+        <raw>
+            <span></span>
+            this.root.innerHTML = opts.content
+        </raw>
+    </script>
 
     <script>
         $(document).ready(function() {
@@ -54,10 +58,8 @@
                 
                 if (blogdata.length === 0) {
                     riot.mount('riot-default');
-                    console.log('default');
                 } else {
                     riot.mount('riot-container', { data: blogdata });
-                    console.log('list');
                 }
             });
             
