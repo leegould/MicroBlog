@@ -36,27 +36,23 @@
                     
                     <div classname="row">
                         <div classname="blogheader"><a href={ id }>{ title }</a></div>
-                        <div><a href={ id }>{ content }</a></div>
+                        <div>
+                            { content }
+                        </div>
                     </div>
                 </div>
             </div>
         </riot-container>
     </script>
 
+
     <script>
         $(document).ready(function() {
             
             $.getJSON("api/", function(data) {
                 var blogdata = data;
-                //console.log(data);
-                //$.each(data, function (item) {
-                //    console.log(item);
-                //    blogdata.push(item);
-                //});
-                //console.log(blogdata);
-
+                
                 if (blogdata.length === 0) {
-                    //blogdata.push({ id: 0, title: "There are no blogs created yet.", content: "Click here to add one" });
                     riot.mount('riot-default');
                     console.log('default');
                 } else {

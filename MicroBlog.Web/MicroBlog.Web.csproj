@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="create.html" />
+    <Content Include="edit.html" />
     <Content Include="index.html" />
     <Content Include="css\bloglist.css" />
     <Content Include="Web.config" />
