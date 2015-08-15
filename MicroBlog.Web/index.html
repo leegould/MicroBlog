@@ -34,8 +34,8 @@
                 <h1>My Blogs</h1>
                 <div each={ opts.data }>
                     
-                    <div classname="row">
-                        <div classname="blogheader"><a href={ id }>{ title }</a></div>
+                    <div class="row">
+                        <div class="blogheader"><a href={ 'view.html?id=' + id }><h1>{ title }</h1></a></div>
                         <raw content="{ content }"/>
                     </div>
                 </div>

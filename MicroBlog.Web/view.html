@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Blogs</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/riot/2.2.2/riot+compiler.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/css/bloglist.css">
+</head>
+<body>
+    <riot-container class="container"></riot-container>
+
+    <script type="riot/tag">
+        <riot-container>
+            <div class="container">
+                <div class="row">
+                    <div class="blogheader"><h1>{ opts.data.title }</h1></div>
+                    <raw content="{ opts.data.content }" />
+                </div>
+            </div>
+        </riot-container>
+    </script>
+
+    <script type="riot/tag">
+        <raw>
+            <span></span>
+            this.root.innerHTML = opts.content
+        </raw>
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $.getJSON("api/1", function (data) {
+                var blogdata = data;
+
+                console.log(blogdata);
+
+                if (blogdata.length === 0) {
+                    riot.mount('riot-default');
+                } else {
+                    riot.mount('riot-container', { data: blogdata });
+                }
+            });
+
+            //var mockdata = [
+            //    { id: 1, title: "Test Title 1", content: "Test Content 1" },
+            //    { id: 2, title: "Test Title 2", content: "Test Content 2" }
+            //];
+
+            //riot.mount('riot-container', { data: mockdata });
+        });
+    </script>
+
+</body>
+</html>
