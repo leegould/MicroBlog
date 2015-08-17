@@ -19,12 +19,12 @@
 </head>
 <body>
 
-    <riot-create></riot-create>
+    <riot-blogpostform></riot-blogpostform>
 
-<script type="riot/tag">
-        <riot-create>
+    <script type="riot/tag" src="riot-blogpostform.tag"></script>
+        <!--<riot-blogpostform>
             <div class="container">
-                <form id="newpost">
+                <form id="blogpostform">
                     <h1>Enter the content for your new blogpost</h1>
                     <div>
                         <label for="title">Title</label>
@@ -40,17 +40,18 @@
                     </div>
                 </form>
             </div>
-        </riot-create>
-    </script>
+        </riot-blogpostform>
+    </script>-->
 
     <script>
         $(document).ready(function() {
+            console.log('start');
 
-            riot.mount('riot-create');
+            riot.mount('riot-blogpostform');
 
             var request;
 
-            $("#newpost").submit(function (event) {
+            $("#blogpostform").submit(function (event) {
 
                 if (request) {
                     request.abort();
