@@ -28,12 +28,18 @@
         </riot-default>
     </script>
 
-    <script type="riot/tag">
+<script type="riot/tag">
         <riot-container>
             <div class="container">
-                <h1>My Blogs</h1>
+                <div class="row">
+                    <div class="col-md-8">
+                        <h1>My Blogs</h1>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="createlink"><a href="create.html">Compose</a></span>
+                    </div>
+                </div>
                 <div each={ opts.data }>
-                    
                     <div class="row">
                         <div class="blogheader"><a href={ 'view.html?id=' + id }><h1>{ title }</h1></a></div>
                         <raw content="{ content }"/>

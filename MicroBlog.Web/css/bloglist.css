@@ -1,5 +1,5 @@
 ﻿h1 {
-    margin-bottom: 60px;
+    margin-bottom: 20px;
 }
 
 .row {
@@ -22,6 +22,11 @@
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px; 
+}
+
+.createlink {
+    float: right;
+    clear: both;
 }
 
 /*.blogheader {
