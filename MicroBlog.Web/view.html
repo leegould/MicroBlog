@@ -38,17 +38,34 @@
     <script>
         $(document).ready(function () {
 
-            $.getJSON("api/1", function (data) {
-                var blogdata = data;
+            var urlParams;
+            (window.onpopstate = function () {
+                var match,
+                    pl = /\+/g,  // Regex for replacing addition symbol with a space
+                    search = /([^&=]+)=?([^&]*)/g,
+                    decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+                    query = window.location.search.substring(1);
 
-                console.log(blogdata);
+                urlParams = {};
+                while (match = search.exec(query))
+                    urlParams[decode(match[1])] = decode(match[2]);
+            })();
 
-                if (blogdata.length === 0) {
-                    riot.mount('riot-default');
-                } else {
-                    riot.mount('riot-container', { data: blogdata });
-                }
-            });
+            console.log(urlParams["id"]);
+            if (urlParams["id"] != '') {
+
+                $.getJSON("api/" + urlParams["id"], function(data) {
+                    var blogdata = data;
+
+                    console.log(blogdata);
+
+                    if (blogdata.length === 0) {
+                        riot.mount('riot-default');
+                    } else {
+                        riot.mount('riot-container', { data: blogdata });
+                    }
+                });
+            }
 
             //var mockdata = [
             //    { id: 1, title: "Test Title 1", content: "Test Content 1" },
