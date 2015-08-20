@@ -17,10 +17,11 @@
 <body>
     <riot-container class="container"></riot-container>
 
-    <script type="riot/tag">
+<script type="riot/tag">
         <riot-container>
             <div class="container">
                 <div class="row">
+                    <a class="editlink" href="edit.html?id={opts.data.id}">Edit</a>
                     <div class="blogheader"><h1>{ opts.data.title }</h1></div>
                     <raw content="{ opts.data.content }" />
                 </div>
@@ -52,7 +53,7 @@
             })();
 
             console.log(urlParams["id"]);
-            if (urlParams["id"] != '') {
+            if (urlParams["id"] !== '') {
 
                 $.getJSON("api/" + urlParams["id"], function(data) {
                     var blogdata = data;
