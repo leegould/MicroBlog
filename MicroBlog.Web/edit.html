@@ -27,11 +27,11 @@
                     <h1>Enter the content for your new blogpost</h1>
                     <div>
                         <label for="title"></label>
-                        <input type="text" id="title" value="{ opts.blogdata.title }" />
+                        <input type="text" id="title" value="{ opts.data.title }" />
                     </div>
                     <div>
                         <div class="editor">
-                            { opts.blogdata.content }
+                            { opts.data.content }
                         </div>
                     </div>
                     <div>
@@ -67,9 +67,11 @@
                     console.log(blogdata);
 
                     if (blogdata.length === 0) {
-                        riot.mount('riot-default');
+                        // TODO 
                     } else {
-                        riot.mount('riot-container', { data: blogdata });
+                        riot.mount('riot-blogpostform', { data: blogdata });
+                        new MediumEditor('.editor');
+
                     }
                 });
             }
@@ -117,7 +119,6 @@
                 event.preventDefault();
             });
 
-            new MediumEditor('.editor');
         });
     </script>
 
