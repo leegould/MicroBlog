@@ -75,52 +75,45 @@
                         var me = new MediumEditor('.editor');
                         me.setContent(blogdata.content, 0);
 
+                        var request;
 
-                    }
-                });
-
-                var request;
-
-                $("#blogpostform").submit(function (event) {
-
-                    if (request) {
-                        request.abort();
-                    }
-
-                    var sendInfo = {
-                        Id: id,
-                        Title: $('#title').val(),
-                        Content: $('.editor').html()
-                    }
-
-                    console.log(sendInfo);
-
-                    request = $.ajax({
-                        beforeSend: function (xhr) { xhr.setRequestHeader("Authorization", "Basic " + btoa("microblog" + ":" + "microblog")); },
-                        type: "PUT",
-                        url: "/api/" + id,
-                        dataType: "json",
-                        success: function (msg) {
-                            if (msg) {
-                                window.location.replace('/index.html');
-                            } else {
-                                console.log("No api response!");
+                        $("#blogpostform").submit(function(event) {
+                            event.preventDefault();
+                            if (request) {
+                                request.abort();
                             }
-                        },
 
-                        data: sendInfo
-                    });
+                            var sendInfo = {
+                                Id: id,
+                                Title: $('#title').val(),
+                                Content: $('.editor').html()
+                            }
+                            
+                            request = $.ajax({
+                                beforeSend: function(xhr) { xhr.setRequestHeader("Authorization", "Basic " + btoa("microblog" + ":" + "microblog")); },
+                                type: "PUT",
+                                url: "/api/" + id,
+                                dataType: "json",
+                                success: function(msg) {
+                                    if (msg) {
+                                        window.location.replace('/view.html?id=' + id);
+                                    } else {
+                                        console.log("No api response!");
+                                    }
+                                },
 
-                    // Callback handler that will be called on failure
-                    request.fail(function (jqXHR, textStatus, errorThrown) {
-                        console.error(
-                            "The following error occurred: " +
-                            textStatus, errorThrown
-                        );
-                    });
+                                data: sendInfo
+                            });
 
-                    //alert("Handler for .submit() called.");
-                    event.preventDefault();
+                            // Callback handler that will be called on failure
+                            request.fail(function (jqXHR, textStatus, errorThrown) {
+                                console.error(
+                                    "The following error occurred: " +
+                                    textStatus, errorThrown
+                                );
+                            });
+                        });
+                    }
                 });
             }
         });
