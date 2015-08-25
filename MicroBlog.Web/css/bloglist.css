@@ -24,9 +24,15 @@
     border-radius: 4px; 
 }
 
-.createlink, .editlink {
+.createlink {
     float: right;
     clear: both;
+}
+
+.link {
+    float: right;
+    clear: left;
+    margin-left: 10px;
 }
 
 /*.blogheader {
