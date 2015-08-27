@@ -59,7 +59,7 @@
     <script>
         $(document).ready(function() {
             
-            $.getJSON("api/", function(data) {
+            $.getJSON("api/?$top=5", function(data) {
                 var blogdata = data;
                 
                 if (blogdata.length === 0) {

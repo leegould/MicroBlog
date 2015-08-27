@@ -56,6 +56,29 @@ namespace MicroBlog.Tests
             Assert.Equal(typeof(List<Post>), result.Body.DeserializeJson<List<Post>>().GetType());
         }
 
+        [Fact]
+        public void Should_Return_LimitedPosts_When_OData()
+        {
+            var fakePostRepository = new Mock<IPostRepository>();
+            fakePostRepository.Setup(x => x.GetAll()).Returns(new List<Post> { new Post { Id = 1 }, new Post { Id = 2}, new Post { Id = 3}});
+
+            var browser = new Browser(cfg =>
+            {
+                cfg.Dependencies<IPostRepository>(fakePostRepository.Object);
+                cfg.Module<BlogModule>();
+            });
+
+            var result = browser.Get("/", with =>
+            {
+                with.HttpRequest();
+                with.Query("$top", "1");
+            });
+
+            var results = result.Body.DeserializeJson<List<Post>>();
+            Assert.Equal(typeof(List<Post>), results.GetType());
+            Assert.Equal(1, results.Count);
+        }
+
         #endregion
 
         #region Getting
