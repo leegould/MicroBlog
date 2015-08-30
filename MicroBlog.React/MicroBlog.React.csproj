@@ -65,6 +65,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\bloglist.css" />
     <Content Include="index.html" />
     <Content Include="js\lib\JSXTransformer.js" />
     <Content Include="js\lib\react-with-addons.js" />

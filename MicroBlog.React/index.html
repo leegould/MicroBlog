@@ -7,14 +7,43 @@
     <script src="js/lib/JSXTransformer.js"></script>
 
     <script type="text/jsx" src="test.js"></script>
+
+    <link rel="stylesheet" href="/css/bloglist.css">
 </head>
 <body>
-    <div id="example"></div>
+    <div id="blogs"></div>
+
     <script type="text/jsx">
+        var BlogItems = React.createClass({
+            getInitialState: function() {
+                return { data: 
+                    { id: 1, title: "Test Title 1", content: "Test Content 1" }
+                 };
+            },
+            render: function() {
+                return (
+                    <div className="row">
+                        <div className="blogheader"><a href={ 'view.html?id=' + this.state.data.id }><h1>{ this.state.data.title }</h1></a></div>
+                        <raw content="{ this.state.data.content }" />
+                    </div>
+                );
+            }
+        });
+    
         React.render(
-        <h1>Hello, world!</h1>,
-        document.getElementById('example')
+            <div classname="row">
+                <div classname="col-md-8">
+                    <h1>My Blogs</h1>
+                </div>
+                <div classname="col-md-4">
+                    <span classname="createlink"><a href="create.html">Compose</a></span>
+                </div>
+                <BlogItems />
+            </div>,
+            document.getElementById('blogs')
         );
     </script>
+
+
 </body>
 </html>

@@ -1,0 +1,52 @@
+﻿h1 {
+    margin-bottom: 20px;
+}
+
+.row {
+    margin: 10px;
+    padding: 10px;
+    background-color: lightgrey;
+    -moz-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+    -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+    box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px; 
+}
+
+.blogheader {
+    background-color: darkgray;
+    -moz-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+    -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+    box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px; 
+}
+
+.createlink {
+    float: right;
+    clear: both;
+}
+
+.link {
+    float: right;
+    clear: left;
+    margin-left: 10px;
+}
+
+/*.blogheader {
+    font-weight: bold;
+    font-size: large;
+}*/
+
+a {
+    color: #000000;
+}
+
+.editor {
+    min-height: 300px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid darkblue;
+}
