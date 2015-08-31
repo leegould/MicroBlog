@@ -72,7 +72,7 @@
     <Content Include="js\lib\react-with-addons.min.js" />
     <Content Include="js\lib\react.js" />
     <Content Include="js\lib\react.min.js" />
-    <Content Include="test.js" />
+    <Content Include="blogItem.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
