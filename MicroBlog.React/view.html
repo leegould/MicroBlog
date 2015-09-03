@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>View</title>
+
+    <script src="js/lib/react.js"></script>
+    <script src="js/lib/JSXTransformer.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script type="text/jsx" src="js/jsx/blogItem.js">
+    </script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/css/bloglist.css">
+</head>
+<body>
+
+    <div id="blog"></div>
+
+    <script type="text/jsx">
+
+        var Item = React.createClass({
+            loadData: function() {
+    
+                var urlParams;
+                (window.onpopstate = function () {
+                    var match,
+                    pl = /\+/g,  // Regex for replacing addition symbol with a space
+                    search = /([^&=]+)=?([^&]*)/g,
+                    decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+                    query = window.location.search.substring(1);
+
+                    urlParams = {};
+                    while (match = search.exec(query))
+                    urlParams[decode(match[1])] = decode(match[2]);
+                })();
+
+                $.ajax({
+                    url: "api/" + urlParams["id"],
+                    dataType: 'json',
+                    cache: false,
+                    success: function(data) {
+                        this.setState({data: data});
+                    }.bind(this),
+                    error: function(xhr, status, err) {
+                        console.error(this.props.url, status, err.toString());
+                    }.bind(this)
+                });
+            },
+            getInitialState: function() {
+                return { data: {} };
+            },
+            componentDidMount: function() {
+                this.loadData();
+            },
+            render: function() {
+                return (
+                    <div className="container">
+                        <BlogItem data={this.state.data} />
+                    </div>
+                );
+            }
+        });
+
+        React.render(
+            <Item />,
+            document.getElementById('blog')
+        );
+
+    </script>
+
+</body>
+</html>

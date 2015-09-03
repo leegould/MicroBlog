@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React!</title>
+    <script src="js/lib/react.js"></script>
+    <script src="js/lib/JSXTransformer.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script type="text/jsx" src="js/jsx/blogItems.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/css/bloglist.css">
+</head>
+<body>
+    <div id="blogs"></div>
+
+    <script type="text/jsx">
+   
+        var BlogList = React.createClass({
+            loadData: function() {
+                $.ajax({
+                    url: "api/?$top=5",
+                    dataType: 'json',
+                    cache: false,
+                    success: function(data) {
+                        this.setState({data: data});
+                    }.bind(this),
+                    error: function(xhr, status, err) {
+                        console.error(this.props.url, status, err.toString());
+                    }.bind(this)
+                });
+            },
+            getInitialState: function() {
+                return { data: [] };
+            },
+            componentDidMount: function() {
+                this.loadData();
+            },
+            render: function() {
+                return (
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-8">
+                                <h1>My Blogs</h1>
+                            </div>
+                            <div className="col-md-4">
+                                <span className="createlink"><a href="create.html">Compose</a></span>
+                            </div>
+                        </div>
+                        <BlogItems data={this.state.data} />
+                    </div>
+                );
+            }
+        });
+    
+        React.render(
+            <BlogList />,
+            document.getElementById('blogs')
+        );
+    
+</script>
+
+</body>
+</html>
