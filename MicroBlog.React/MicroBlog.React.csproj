@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\bloglist.css" />
+    <Content Include="edit.html" />
     <Content Include="index.html" />
     <Content Include="js\jsx\blogItem.js" />
     <Content Include="js\lib\JSXTransformer.js" />
