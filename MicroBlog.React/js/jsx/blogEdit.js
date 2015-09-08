@@ -19,6 +19,8 @@
             cache: false,
             success: function(data) {
                 this.setState({title: data.title, content: data.content, id: data.id});
+                var me = new MediumEditor('.editor');
+                me.setContent(data.content, 0);
             }.bind(this),
             error: function(xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
@@ -26,7 +28,7 @@
         });
     },
     getInitialState: function() {
-        return { data: {} };
+        return { title: "", content: "", data: {} };
     },
     handleTitleChange: function(event) {
         this.setState({title: event.target.value});
@@ -45,7 +47,7 @@
                 </div>
                 <div>
                     <div className="editor">
-                        { this.state.content }
+                        //{ this.state.content }
                     </div>
                 </div>
                 <div>
